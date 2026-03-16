@@ -18,6 +18,7 @@ export default function TabLayout() {
     return (
       <Tabs
         screenOptions={{
+          headerShown: false,
           tabBarStyle: {
             paddingHorizontal: 10,
 

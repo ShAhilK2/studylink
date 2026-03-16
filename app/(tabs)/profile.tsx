@@ -1,7 +1,8 @@
+import Screen from "@/components/screen";
 import { useAuth } from "@clerk/expo";
 import { router } from "expo-router";
 import React from "react";
-import { Pressable, Text, View } from "react-native";
+import { Pressable, Text } from "react-native";
 
 const ProfileScreen = () => {
   const { signOut } = useAuth();
@@ -16,7 +17,7 @@ const ProfileScreen = () => {
   };
 
   return (
-    <View className="flex-1 items-center justify-center">
+    <Screen>
       <Text className="text-xl mb-4">Profile Screen</Text>
       <Pressable
         onPress={handleSignOut}
@@ -24,7 +25,7 @@ const ProfileScreen = () => {
       >
         <Text className="text-white font-semibold">Sign Out</Text>
       </Pressable>
-    </View>
+    </Screen>
   );
 };
 

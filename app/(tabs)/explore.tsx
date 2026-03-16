@@ -1,12 +1,13 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React from "react";
+import { Text } from "react-native";
+import Screen from "../../components/screen";
 
 const ExploreScreen = () => {
   return (
-    <View>
+    <Screen>
       <Text>ExploreScreen</Text>
-    </View>
-  )
-}
+    </Screen>
+  );
+};
 
-export default ExploreScreen
+export default ExploreScreen;
