@@ -25,7 +25,6 @@ const useSocialAuth = () => {
     try {
       const { createdSessionId, setActive } = await startSSOFlow({
         strategy,
-       // ✅ Required for Android
       });
 
       if (!createdSessionId || !setActive) {
@@ -37,18 +36,15 @@ const useSocialAuth = () => {
       }
 
       await setActive({ session: createdSessionId });
-      router.push("/")
- 
+      router.push("/");
     } catch (error) {
       console.error("Social auth error:", error);
       Alert.alert(
         "Sign-in failed",
         `${getProvider(strategy)} sign-in failed. Please try again.`, // ✅ Uses param, not stale state
       );
-
     } finally {
       setLoadingStrategy(null);
-
     }
   };
 

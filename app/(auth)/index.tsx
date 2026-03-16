@@ -9,16 +9,21 @@ import {
   Pressable,
   ScrollView,
   Text,
-  View
+  View,
 } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 const AuthScreen = () => {
   const { handleSocialAuth, loadingStrategy } = useSocialAuth();
 
+  const insets = useSafeAreaInsets();
   const isLoading = loadingStrategy !== null;
 
   return (
-    <View className="flex-1 bg-background">
+    <View
+      className="flex-1 bg-background"
+      style={{ paddingTop: insets.top + 20 }}
+    >
       {/* linear background */}
       <View className="absolute inset-0">
         <LinearGradient
@@ -105,7 +110,6 @@ const AuthScreen = () => {
                   style={{ width: 28, height: 28 }}
                   resizeMode="contain"
                 />
-             
               )}
             </Pressable>
 
