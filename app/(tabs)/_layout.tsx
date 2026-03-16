@@ -2,7 +2,7 @@ import { useAuth } from "@clerk/expo";
 import { Ionicons } from "@expo/vector-icons";
 import { Redirect, Tabs } from "expo-router";
 import { Icon, Label, NativeTabs } from "expo-router/unstable-native-tabs";
-import { Platform } from "react-native";
+import { Platform, StyleSheet, View } from "react-native";
 
 export default function TabLayout() {
   const { signOut, isLoaded, isSignedIn } = useAuth();
@@ -16,58 +16,67 @@ export default function TabLayout() {
   if (Platform.OS === "android") {
     // Android-specific tab layout
     return (
-      <Tabs
-        screenOptions={{
-          headerShown: false,
-          tabBarStyle: {
-            paddingHorizontal: 10,
+      <View className="flex-1 bg-background">
+        <Tabs
+          screenOptions={{
+            headerShown: false,
+            tabBarStyle: {
+              paddingHorizontal: 10,
+              marginHorizontal: 20,
+              marginBottom: 20,
+              borderRadius: 50,
+              borderWidth: StyleSheet.hairlineWidth,
+              borderColor: "rgba(255, 255, 255, 0.5)",
+              shadowColor: "#000",
+              shadowOffset: {
+                width: 0,
+                height: 2,
+              },
+              shadowOpacity: 0.25,
+              shadowRadius: 3.84,
+              elevation: 5,
 
-            marginHorizontal: 20,
-            marginBottom: 20,
-            borderRadius: 100,
-            borderWidth: 1,
-            borderColor: "#e0e0e0",
-
-            backgroundColor: "white",
-          },
-          tabBarItemStyle: {
-            // paddingVertical: 8,
-            // paddingHorizontal: 16,
-            // borderRadius: 50,
-            // marginHorizontal: 4,
-          },
-          tabBarActiveTintColor: "#007AFF",
-          tabBarInactiveTintColor: "#000",
-        }}
-      >
-        <Tabs.Screen
-          name="index"
-          options={{
-            title: "Chat",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="chatbubbles" size={size} color={color} />
-            ),
+              backgroundColor: "rgba(23, 33, 43, 0.5)",
+            },
+            tabBarItemStyle: {
+              // paddingVertical: 8,
+              // paddingHorizontal: 16,
+              // borderRadius: 50,
+              // marginHorizontal: 4,
+            },
+            tabBarActiveTintColor: "#007AFF",
+            tabBarInactiveTintColor: "#fff",
           }}
-        />
-        <Tabs.Screen
-          name="explore"
-          options={{
-            title: "Explore",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="journal" size={size} color={color} />
-            ),
-          }}
-        />
-        <Tabs.Screen
-          name="profile"
-          options={{
-            title: "Profile",
-            tabBarIcon: ({ color, size }) => (
-              <Ionicons name="person" size={size} color={color} />
-            ),
-          }}
-        />
-      </Tabs>
+        >
+          <Tabs.Screen
+            name="index"
+            options={{
+              title: "Chat",
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="chatbubbles" size={size} color={color} />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="explore"
+            options={{
+              title: "Explore",
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="journal" size={size} color={color} />
+              ),
+            }}
+          />
+          <Tabs.Screen
+            name="profile"
+            options={{
+              title: "Profile",
+              tabBarIcon: ({ color, size }) => (
+                <Ionicons name="person" size={size} color={color} />
+              ),
+            }}
+          />
+        </Tabs>
+      </View>
     );
   }
 
