@@ -2,6 +2,7 @@ import { useUser } from "@clerk/expo";
 // Remove this import ↓
 // import type { UserResource } from "@clerk/types";
 import { studyBuddyTheme } from "@/lib/theme";
+import * as Sentry from "@sentry/react-native";
 import { useEffect, useRef } from "react";
 import { Chat, OverlayProvider, useCreateChatClient } from "stream-chat-expo";
 import { FullScreenLoader } from "./FullScreenLoader";
@@ -46,18 +47,26 @@ const ChatClient = ({
   }, [user]);
 
   const tokenProvider = async () => {
-    const response = await fetch("/api/token", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        userId: user.id,
-      }),
-    });
+    try {
+      const response = await fetch("/api/token", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userId: user.id,
+        }),
+      });
 
-    const data = await response.json();
-    return data.token;
+      const data = await response.json();
+      return data.token;
+    } catch (error) {
+      console.error("Error getting token:", error);
+      Sentry.logger.error("Error getting token:", { error: String(error) });
+      Sentry.captureException(error, {
+        extra: { userId: user.id, hook: "tokenProvider" },
+      });
+    }
   };
 
   const chatClient = useCreateChatClient({

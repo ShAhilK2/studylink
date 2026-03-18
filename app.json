@@ -10,7 +10,7 @@
     "newArchEnabled": true,
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.skdev8.studylink"
+      "bundleIdentifier": "com.skdev8.studylink.dev"
     },
     "android": {
       "adaptiveIcon": {
@@ -21,7 +21,7 @@
       },
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "package": "com.skdev8.studylink"
+      "package": "com.skdev8.studylink.dev"
     },
     "web": {
       "bundler": "metro",
@@ -30,6 +30,37 @@
     },
     "plugins": [
       "expo-router",
+      [
+        "expo-build-properties",
+        {
+          "android": {
+            "minSdkVersion": 24
+          }
+        }
+      ],
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "${PRODUCT_NAME} needs access to your photos to let you share them with your friends.",
+          "colors": {
+            "cropToolbarColor": "#000000"
+          },
+          "dark": {
+            "colors": {
+              "cropToolbarColor": "#000000"
+            }
+          },
+          "cameraPermission": "${PRODUCT_NAME} needs access to your camera to take photos."
+        }
+      ],
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Allow $(PRODUCT_NAME) to access your microphone.",
+          "enableBackgroundPlayback": true,
+          "enableBackgroundRecording": false
+        }
+      ],
       [
         "expo-splash-screen",
         {
@@ -42,7 +73,12 @@
           }
         }
       ],
-      "@clerk/expo",
+      [
+        "@clerk/expo",
+        {
+          "enableAppleAuth": false
+        }
+      ],
       "expo-secure-store",
       "expo-web-browser",
       [
@@ -52,7 +88,8 @@
           "project": "studylink-app",
           "organization": "kataria-ki"
         }
-      ]
+      ],
+      "expo-audio"
     ],
     "experiments": {
       "typedRoutes": true,
